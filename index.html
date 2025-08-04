@@ -9,9 +9,10 @@
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <!--FONTAWESOME ICONS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--ESTILOS PERSONALIZADOS-->
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
 <body>
     <!--header y navbar-->
@@ -104,19 +105,108 @@
         </div>
     </section>
     <!--MAIN CONTENT-->
-    <main class="container-xl">
+    <main class="container-xl p-0 overflow-hidden">
         <!--SECCION INTRODUCCION-->
         <section class="section-intro row">
             <div class="col-12 col-md-6">
-                <h1>Bienvenido a nuestro SHOP GAMER</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt asperiores aspernatur harum tenetur esse quaerat minus quasi reprehenderit cum, maxime provident debitis at corrupti laboriosam pariatur ut consectetur saepe quidem quibusdam, quisquam sapiente vero itaque dolorem qui! Consequatur excepturi nobis totam vitae. Voluptatum sit unde odio vel, officia nostrum, ipsum excepturi amet animi et praesentium delectus ea. Sit nam explicabo nobis ea. Nam optio aliquam nisi iusto incidunt ipsam cumque!</p>
+                <div class="p-4">
+                    <h1 class="h3 text-center mb-3">Bienvenido a nuestro SHOP GAMER</h1>
+                    <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt asperiores aspernatur harum tenetur esse quaerat minus quasi reprehenderit cum, maxime provident debitis at corrupti laboriosam pariatur ut consectetur saepe quidem quibusdam, quisquam sapiente vero itaque dolorem qui! Consequatur excepturi nobis totam vitae. Voluptatum sit unde odio vel, officia nostrum, ipsum excepturi amet animi et praesentium delectus ea. Sit nam explicabo nobis ea. Nam optio aliquam nisi iusto incidunt ipsam cumque!</p>
+                </div>
             </div>
+            <!--IMAGE INFO-->
             <div class="col-12 col-md-6">
-                <img class="info-img" src="assets/image/imagen4.png" alt="imagen intro">
+                <div class="p-0">
+                    <img class="info-img" src="assets/image/imagen4.png" alt="imagen intro">
+                </div>
             </div>
         </section>
         <!--SECCION DE PRODICTOS DESTACADOS-->
+        <section class="section-products">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="products-container">
+                <div class="product-wrapper">
+                    <div class="product-card">
+                        <!--HEADER PRODUCTO-->
+                        <div class="product-card-header">
+                            <img src="assets/image/juego.png" class="product-image" alt="">
+                            <div class="product-category">ACTION</div>
+                        </div>
+                        <!--BODY PRODUCTO-->
+                        <div class="product-card-body">
+                            <h1 class="product-title">Titulo del juego</h1>
+                            <p class="product-price">$59.99</p>
+                        </div>
+                        <!--FOOTER PRODUCTO-->
+                        <div class="product-card-footer">
+                            <button class="btn btn-primary">COMPRAR</button>
+                            <button class="btn btn-dark"><i class="fa-solid fa-link"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!--SECCION DE CARACTERISTICAS DE NUESTRO SERVICIO-->
+        <section class="section-feactures">
+            <h2 class="section-title">Características de Nuestro Servicio</h2>
+            <div class="row g-0">
+                <div class="col-12 col-sm-4">
+                    <div class="feacture-container">
+                        <i class="fa-solid fa-truck"></i>
+                        <p>Envío gratis en compras mayores a $100</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="feacture-container">
+                        <i class="fa-solid fa-box-open"></i>
+                        <p>Devoluciones gratis dentro de los 30 días</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <div class="feacture-container">
+                        <i class="fa-solid fa-headset"></i>
+                        <p>Atención al cliente 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!--FOOTER-->
+    <footer class="main-footer container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <section class="footer-social">
+                        <ul class="social-list">
+                            <li class="social-item">
+                                <a href="https://www.facebook.com" target="_blank" class="social-link">
+                                    <i class="fa-brands fa-facebook"></i> Facebook
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="https://www.instagram.com" target="_blank" class="social-link">
+                                    <i class="fa-brands fa-instagram"></i> Instagram
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="https://www.linkedIn.com" target="_blank" class="social-link">
+                                    <i class="fa-brands fa-linkedin"></i></i> LinkedIn
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-12 col-md-4">
+                    <section class="footer-brand">
+                        BRAND NAME
+                    </section>
+                </div>
+                <div class="col-12 col-md-4">
+                    <section class="footer-contact">
+                        CONTACT OPTIONS
+                    </section>
+                </div>
+            </div>
+    </footer>
 </body>
 </html>
