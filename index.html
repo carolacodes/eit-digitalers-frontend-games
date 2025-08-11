@@ -16,7 +16,7 @@
 </head>
 <body>
     <!--header y navbar-->
-    <header>
+    <header class="main-header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">DG</a>
@@ -34,8 +34,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Nosotros</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Admin</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/pages/admin/admin-products.html">Admin Products</a></li>
+                                    <li><a class="dropdown-item" href="/pages/admin/admin-users.html">Admin Users</a></li>
+                                </ul>
                             </li>
                             </ul>
                     </div>
