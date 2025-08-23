@@ -1,0 +1,33 @@
+.table-admin {
+    width: 100%;
+
+    td {
+        vertical-align: middle;
+    }
+
+    .cell-image {
+        padding: .5rem;
+
+        img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    .cell-name {
+        font-weight: bold;
+    }
+
+    .cell-price {
+        font-weight: 600;
+    }
+
+    .cell-actions {
+        text-align: center;
+        button:not(:last-child) { /*siempre que no sea el ultimo boton*/
+            margin-right: .25rem;
+        }
+    }
+}

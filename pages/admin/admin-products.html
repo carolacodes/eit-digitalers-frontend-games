@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--ESTILOS PERSONALIZADOS-->
     <link rel="stylesheet" href="../../css/styles.css">
-
+    <link rel="stylesheet" href="/css/table.css">
     <title>Admin Products</title>
+    <script src="/js/admin-products.js" defer></script>
 </head>
 <body>
     <!--header y navbar-->
@@ -48,7 +49,43 @@
         </nav>
     </header>
     <main class="container-xl p-0 overflow-hidde">
-        <h1>Admin Products</h1>
+        <h1 class="main-title">Admin Products</h1>
+        <!--ROW DE PRODUCTOS-->
+        <div class="row">
+            <!--DIV DEL FORMULARIO DE PRODUCTOS-->
+            <div class="col-12 col-lg-4">
+                formulario
+            </div>
+            <!--DIV DE FILTROS Y TABLA DE PRODUCTOS-->
+            <div class="col-12 col-lg-8">
+                <div class="row p-4">FILTROS</div>
+                <div class="table-container p-4">
+                    <table class="table table-admin">
+                        <thead>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="cell-image"><img src="../../assets/image/juego.png" alt="imagen del producto"></td>
+                                <td class="cell-name">Titulo</td>
+                                <td class="cell-category">Categoria</td>
+                                <td class="cell-price">Precio</td>
+                                <td class="cell-date">Fecha</td>
+                                <td class="cell-actions">
+                                    <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
     <!--FOOTER-->
     <footer class="main-footer container-fluid">
