@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--ESTILOS PERSONALIZADOS-->
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="../../css/table.css">
+    <link rel="stylesheet" href="../../css/form.css">
+    <!--SWEET ALERT2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Admin Products</title>
-    <script src="/js/admin-products.js" defer></script>
+    <script src="../../js/admin-products.js" defer type="module"></script>
 </head>
 <body>
     <!--header y navbar-->
@@ -54,11 +57,111 @@
         <div class="row">
             <!--DIV DEL FORMULARIO DE PRODUCTOS-->
             <div class="col-12 col-lg-4">
-                formulario
+                <form id="gamesForm" class="py-3 px-5 admin-form">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Título del juego</label>
+                        <input  type="text" 
+                                class="form-control" 
+                                id="title"
+                                name="name"
+                                required       
+                                minlength="2"
+                                maxlength="80"
+                                value="Juego de Prueba"
+                        >
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="col-6">
+                            <label for="price" class="form-label">Precio</label>
+                            <input  type="number" 
+                                    class="form-control"
+                                    name="price"
+                                    required
+                                    min="0"
+                                    max="9999"
+                                    step="0.01"
+                                    value="20"
+                            >
+                    </div>
+
+                    <div class="col-6">
+                        <label class="form-label">Categoría</label>
+                        <select name="category" class="form-select" required>
+                        <option value="action">Acción</option>
+                        <option value="adventure">Aventura</option>
+                        <option value="strategy">Estrategia</option>
+                        <option value="role-playing">Rol</option>
+                        <option value="simulation">Simulación</option>
+                        <option value="sports" selected>Deportes</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">URL Imagen</label>
+                        <input  type="url" 
+                                name="image"
+                                class="form-control"
+                                required
+                                value="https://image.api.playstation.com/vulcan/ap/rnd/202405/2117/bd406f42e9352fdb398efcf21a4ffe575b2306ac40089d21.png"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Descripción</label>
+                        <textarea class="form-control"
+                                    placeholder="Escribe una descripción del juego..."
+                                    name="description" 
+                                    rows="5"
+                                    required
+                                    minlength="20"
+                                    maxlength="500"
+                        >Descripción de prueba para checkear la carga de mis JS</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Cargar</button>
+                </form>
             </div>
+
             <!--DIV DE FILTROS Y TABLA DE PRODUCTOS-->
             <div class="col-12 col-lg-8">
-                <div class="row p-4">FILTROS</div>
+                <!--FILTROS-->
+                <div class="row p-4 gx-3">
+                    <div class="col-5">
+                        <input  type="text"
+                                placeholder="Buscar juego..."
+                                class="form-control"
+                                id="searchInput">
+                    </div>
+                    <div class="col-4">
+                        <select id="categoryFilter" class="form-select">
+                            <option value="all">Todas las categorías</option>
+                            <option value="action">Acción</option>
+                            <option value="adventure">Aventura</option>
+                            <option value="strategy">Estrategia</option>
+                            <option value="role-playing">Rol</option>
+                            <option value="simulation">Simulación</option>
+                            <option value="sports">Deportes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-primary" data-order="asc">
+                            <i class="fa-solid fa-caret-up"></i>
+                        </button>
+
+                        <button class="btn btn-sm btn-primary" data-order="desc">
+                            <i class="fa-solid fa-caret-down"></i>
+                        </button>
+
+                        <button class="btn btn-sm btn-secondary" data-order="reset">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!--TABLA DE PRODUCTOS-->
                 <div class="table-container p-4">
                     <table class="table table-admin">
                         <thead>
@@ -69,24 +172,32 @@
                             <th>Date</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="cell-image"><img src="../../assets/image/juego.png" alt="imagen del producto"></td>
-                                <td class="cell-name">Titulo</td>
-                                <td class="cell-category">Categoria</td>
-                                <td class="cell-price">Precio</td>
-                                <td class="cell-date">Fecha</td>
-                                <td class="cell-actions">
-                                    <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="tableBody">
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
+    <!-- Modal -->
+    <div class="modal fade" id="gameDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
     <!--FOOTER-->
     <footer class="main-footer container-fluid">
         <div class="row">
