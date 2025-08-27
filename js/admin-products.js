@@ -121,32 +121,32 @@ function buildTable(arrayJuegos) {
 
     arrayJuegos.forEach((juego, posicion) => {
 
-    tableBody.innerHTML += `<tr>
-        <td class="cell-image">
-            <img src="${juego.image}" alt="Imagen del producto" />
-        </td>
-        <td class="cell-name">
-        
-            <span data-id="${juego.id}">  ${juego.name} </span>
-        
-        </td>
+        tableBody.innerHTML += `<tr>
+            <td class="cell-image">
+                <img src="${juego.image}" alt="Imagen del producto" />
+            </td>
+            <td class="cell-name">
+            
+                <span data-id="${juego.id}">  ${juego.name} </span>
+            
+            </td>
 
-        <td class="cell-category">${juego.category}</td>
+            <td class="cell-category">${juego.category}</td>
 
-        <td class="cell-price">$ ${juego.price}</td>
+            <td class="cell-price">$ ${juego.price}</td>
 
-        <td class="cell-date">${ formatDate(juego.createdAt) }</td>
+            <td class="cell-date">${ formatDate(juego.createdAt) }</td>
 
-        <td class="cell-actions">
-            <button class="btn btn-primary btn-sm">
-            <i class="fa-solid fa-pencil"></i>
-            </button>
+            <td class="cell-actions">
+                <button class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-pencil"></i>
+                </button>
 
-            <button class="btn btn-danger btn-sm" data-id="${juego.id}">
-            <i class="fa-solid fa-trash"></i>
-            </button>
-        </td>
-        </tr>`;
+                <button class="btn btn-danger btn-sm" data-id="${juego.id}">
+                <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+            </tr>`;
     });
 
     getSpanDialogBtns();
@@ -239,7 +239,7 @@ sortBtns.forEach((btn) => {
     })
 })
 
-
+//MODAL
 function showDialog(id) {
     // Buscar el juego por su id
     const juego = games.find((jueguito) => {
@@ -259,7 +259,7 @@ function showDialog(id) {
         <div class="details-container">
 
             <div class="category">${juego.category}</div>
-            <p>${juego.description}</p>
+            <p class="descripcion">${juego.description}</p>
 
             <div class="price">$ ${juego.price}</div>
 

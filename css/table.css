@@ -18,6 +18,15 @@
 
     .cell-name {
         font-weight: bold;
+
+        span {
+            transition: color .3s ease;
+        }
+
+        span:hover{
+            cursor: pointer;
+            color: rgb(32, 99, 167);
+        }
     }
 
     .cell-price {
