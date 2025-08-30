@@ -1,6 +1,8 @@
 import { formatDate } from "./date-utils.js";
 
-const games = [
+const API_URL = "https://68b343bcc28940c9e69e8c2b.mockapi.io"
+let games = [];
+/* const games = [
     {
         id: 1,
         name: "The Legend of Zelda: Breath of the Wild",
@@ -58,7 +60,7 @@ const games = [
     },
     
 ];
-
+ */
 // Obtenemos elementos del DOM
 const gamesForm = document.getElementById("gamesForm");
 const tableBody = document.getElementById("tableBody");
@@ -68,42 +70,74 @@ const categorySelect = document.querySelector("#categoryFilter");
 
 const sortBtns = document.querySelectorAll("[data-order]");
 
-gamesForm.addEventListener("submit", (evento) => {
 
-    evento.preventDefault();
+// #Cuando cargue mi sitio web por 1ra vex llamare a la funcion encargada de obtener los juegos/productos de mi API (Servidor)
 
-  // console.log("Formulario enviado", evento)
+async function getProducts(){
+    try{
+        const response = await axios.get(`${API_URL}/products`);
+        games = response.data;
+        console.log(games);
+        buildTable(games);
+    }catch(error){
+        console.log("Error al obtener los productos", error);
 
-    const el = evento.target.elements;
-
-    const newGame = {
-        id: Date.now(), // timestamp
-        name: el.name.value, // input text
-        price: el.price.value, // input number
-        description: el.description.value,  // textarea
-        category: el.category.value, // select
-        image: el.image.value, // input url
-        createdAt: new Date().toISOString(), // fecha actual en formato ISO
+        Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudieron cargar los productos",
+        theme: "dark"
+        })
     }
+}
+//primera vez que carga la pagina
+getProducts();
 
-    console.log(newGame);
+gamesForm.addEventListener("submit", async(evento) => {
 
-    // Agregar el nuevo juego al array de juegos
-    games.push(newGame);
+    //dentro del try va toda la logica que queremos que se ejecute
+    try {
+        evento.preventDefault();
 
-    //funcion para mandar mensajes al usuario
-    Swal.fire({
-    icon: "success",
-    title: "Carga correcta!",
-    text: "El juego se ha cargado correctamente.",
-    // // position: "top-end",
-    // // toast: true,
-    // showConfirmButton: false,
-    theme: "dark"
-    })
+    // console.log("Formulario enviado", evento)
 
-  // Vuelvo a iterar el array de juegos para actualizar la tabla
-    buildTable(games);
+        const el = evento.target.elements;
+
+        const newGame = {
+            //id: Date.now(), // timestamp
+            name: el.name.value, // input text
+            price: el.price.value, // input number
+            description: el.description.value,  // textarea
+            category: el.category.value, // select
+            image: el.image.value, // input url
+            createdAt: new Date().toISOString(), // fecha actual en formato ISO
+        }
+
+        console.log(newGame);
+
+        //hacemos una peticion post a nuestro servidor
+        const response = await axios.post(`${API_URL}/products`, newGame)
+
+        // Agregar el nuevo juego al array de juegos
+        //games.push(response.data);
+
+        //funcion para mandar mensajes al usuario
+        Swal.fire({
+        icon: "success",
+        title: "Carga correcta!",
+        text: "El juego se ha cargado correctamente.",
+        // // position: "top-end",
+        // // toast: true,
+        // showConfirmButton: false,
+        theme: "dark"
+        })
+
+    // Vuelvo a iterar el array de juegos para actualizar la tabla
+        getProducts();
+
+    } catch (error) {
+        console.log("Error al cargar el juego", error);
+    }
 })
 
 function buildTable(arrayJuegos) {
@@ -154,26 +188,47 @@ function buildTable(arrayJuegos) {
 
 }
 
-function deleteGame(id) {
+async function deleteGame(id) {
+    try {
+        Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+        theme: "dark"
+        }).then( async(result) => {
+            if (result.isConfirmed) {
+                // Hacer la petición DELETE a la API
+                await axios.delete(`${API_URL}/products/${id}`);
+                // Volver a construir la tabla con los juegos restantes
 
-    const isConfirmed = confirm("¿Estás seguro de eliminar el juego?");
-
-    if (isConfirmed) {
-        // Debería conocer el id del juego a eliminar
-        // Vamos a obtener el índice del juego en el array
-        const indice = games.findIndex((juego) => {
-            return juego.id === id;
-        });
-        // Eliminar el juego del array
-        games.splice(indice, 1); //el 1 indica que solo quiero eliminar un elemento
-
-        buildTable(games);
+                Swal.fire({
+                icon: "success",
+                title: "Eliminado",
+                text: "El juego ha sido eliminado.",
+                theme: "dark"
+                })
+                getProducts();
+            }
+        })
+    }catch (error) {
+        console.log("Error al eliminar el juego", error);
+        Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo eliminar el juego.",
+        theme: "dark"
+        })
     }
 }
 
-// Inicializo la tabla con los juegos existentes
+/* // Inicializo la tabla con los juegos existentes
 buildTable(games);
-
+ */
 
 // #Filtros
 // #Cuando el user escriba en el searchInput
@@ -265,7 +320,7 @@ function showDialog(id) {
 
             <div class="footer-wrapper">
             <div class="date">
-                ${juego.createdAt}
+                ${formatDate(juego.createdAt)}
             </div>
             <button class="btn btn-primary">Editar</button>
             </div>
